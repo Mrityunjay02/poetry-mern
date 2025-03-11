@@ -1,7 +1,15 @@
 import React from 'react';
 import './About.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFacebook, faTwitter, faInstagram, faLinkedin, faSnapchat, faPinterest, faThreads } from '@fortawesome/free-brands-svg-icons';
+import { 
+  faInstagram, 
+  faFacebook, 
+  faLinkedin, 
+  faSnapchat, 
+  faPinterest, 
+  faThreads,
+  faXTwitter 
+} from '@fortawesome/free-brands-svg-icons';
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
 
 const About = () => {
@@ -47,9 +55,9 @@ const About = () => {
           <FontAwesomeIcon icon={faInstagram} />
           <span className="social-label">Instagram</span>
         </a>
-        <a href="https://x.com/im_mjay_0" target="_blank" rel="noopener noreferrer" className="social-link twitter">
-          <FontAwesomeIcon icon={faTwitter} />
-          <span className="social-label">Twitter</span>
+        <a href="https://x.com/im_mjay_0" target="_blank" rel="noopener noreferrer" className="social-link x">
+          <FontAwesomeIcon icon={faXTwitter} />
+          <span className="social-label">X</span>
         </a>
         <a href="https://www.linkedin.com/in/mrityunjay-bhardwaj-38012a1b1/" target="_blank" rel="noopener noreferrer" className="social-link linkedin">
           <FontAwesomeIcon icon={faLinkedin} />
