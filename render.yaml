@@ -3,11 +3,8 @@ services:
     name: poetry-mern-backend
     runtime: node
     rootDirectory: Server
-    buildCommand: |
-      npm cache clean --force
-      rm -rf node_modules package-lock.json
-      npm install
-    startCommand: NODE_OPTIONS='--experimental-specifier-resolution=node' node server.js
+    buildCommand: npm install --omit=dev
+    startCommand: node server.js
     envVars:
       - key: NODE_VERSION
         value: 18.20.7
