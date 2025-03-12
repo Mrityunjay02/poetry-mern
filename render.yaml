@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: poetry-mern-backend
+    name: mjaypoetry
     runtime: node
     rootDirectory: Server
     buildCommand: npm install

@@ -119,7 +119,7 @@ const server = app.listen(PORT, () => {
   console.log(`
 🚀 Server is running on:
    - Local: http://localhost:${PORT}
-   - Production: https://poetry-mern-backend.onrender.com
+   - Production: https://mjaypoetry.onrender.com
    - Environment: ${process.env.NODE_ENV}
    - Port: ${PORT}
   `);
