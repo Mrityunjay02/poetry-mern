@@ -2,11 +2,9 @@ services:
   - type: web
     name: poetry-mern-backend
     runtime: node
-    buildCommand: |
-      cd Server
-      rm -rf node_modules package-lock.json
-      NODE_ENV=production npm install --production
-    startCommand: cd Server && node server.js
+    rootDirectory: Server
+    buildCommand: npm install --production
+    startCommand: node server.js
     envVars:
       - key: NODE_VERSION
         value: 18.20.7
