@@ -18,3 +18,7 @@ services:
           property: connectionString
     healthCheckPath: /
     autoDeploy: true
+    headers:
+      - path: /*
+        name: Access-Control-Allow-Origin
+        value: https://poetry-mern.c3dotfh.mjayp.projects.vercel.app

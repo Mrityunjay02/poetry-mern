@@ -25,7 +25,7 @@ if (!process.env.MONGODB_URI) {
 
 const app = express();
 app.use(cors({
-  origin: ['http://localhost:3000', 'https://mjaypoetry.onrender.com', 'https://shayari-mern.onrender.com', 'https://shayari-mern.vercel.app'],
+  origin: ['http://localhost:3000', 'https://mjaypoetry.onrender.com', 'https://shayari-mern.onrender.com', 'https://shayari-mern.vercel.app', 'https://poetry-mern.c3dotfh.mjayp.projects.vercel.app'],
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization']
