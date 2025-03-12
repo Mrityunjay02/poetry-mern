@@ -1,10 +1,10 @@
-// CommonJS-style imports for better compatibility
-const express = await import('express');
-const cors = await import('cors');
-const dotenv = await import('dotenv');
-const { fileURLToPath } = await import('url');
-const { dirname, join } = await import('path');
-const mongoose = await import('mongoose');
+// ES Module imports
+import express from 'express';
+import cors from 'cors';
+import dotenv from 'dotenv';
+import { fileURLToPath } from 'url';
+import { dirname, join } from 'path';
+import mongoose from 'mongoose';
 import router from './routes/shayari.js';
 
 // Get __dirname equivalent in ES Module
@@ -28,14 +28,14 @@ if (!process.env.MONGODB_URI) {
   process.exit(1);
 }
 
-const app = express.default();
-app.use(cors.default({
+const app = express();
+app.use(cors({
   origin: ['http://localhost:3000', 'https://mjaypoetry.onrender.com', 'https://shayari-mern.onrender.com', 'https://shayari-mern.vercel.app'],
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization']
 }));
-app.use(express.default.json());
+app.use(express.json());
 
 // Root route
 app.get('/', (req, res) => {
@@ -54,7 +54,7 @@ const mongoURI = process.env.MONGODB_URI;
 console.log('🚀 Attempting to connect to MongoDB...');
 
 // Connect using Mongoose
-mongoose.default.connect(mongoURI, {
+mongoose.connect(mongoURI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   serverSelectionTimeoutMS: 30000,
@@ -70,15 +70,15 @@ mongoose.default.connect(mongoURI, {
 });
 
 // Handle MongoDB connection events
-mongoose.default.connection.on('connected', () => {
+mongoose.connection.on('connected', () => {
   console.log('🎉 Mongoose connected to MongoDB');
 });
 
-mongoose.default.connection.on('error', (err) => {
+mongoose.connection.on('error', (err) => {
   console.error('❌ Mongoose connection error:', err);
 });
 
-mongoose.default.connection.on('disconnected', () => {
+mongoose.connection.on('disconnected', () => {
   console.log('💔 Mongoose disconnected');
 });
 
@@ -94,6 +94,6 @@ app.listen(PORT, () => {
 // Handle server shutdown
 process.on('SIGTERM', () => {
   console.log('Received SIGTERM signal. Closing server...');
-  mongoose.default.connection.close();
+  mongoose.connection.close();
   process.exit(0);
 });

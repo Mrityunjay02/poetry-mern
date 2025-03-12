@@ -1,13 +1,13 @@
-const express = require('express');
+import express from 'express';
 const router = express.Router();
-const {
+import {
   addShayaris,
   deleteShayaris,
   getShayaris,
   editShayaris,
-} = require("../controller/shayari.controller");
-const { loginUser, register } = require("../controller/auth.controller");
-const { authenticateToken } = require("../middleware/auth.middleware");
+} from "../controller/shayari.controller.js";
+import { loginUser, register } from "../controller/auth.controller.js";
+import { authenticateToken } from "../middleware/auth.middleware.js";
 
 // Public routes
 router.get("/getShayari", getShayaris);
@@ -19,4 +19,4 @@ router.post("/addShayari", authenticateToken, addShayaris);
 router.delete("/deleteShayari/:id", authenticateToken, deleteShayaris);
 router.put("/editShayari/:id", authenticateToken, editShayaris);
 
-module.exports = router;
+export default router;
