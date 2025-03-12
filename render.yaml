@@ -4,9 +4,9 @@ services:
     runtime: node
     rootDirectory: Server
     buildCommand: |
-      cd /opt/render/project/src/Server
+      cd Server
       npm install --omit=dev
-    startCommand: node server.js
+    startCommand: cd Server && node server.js
     envVars:
       - key: NODE_VERSION
         value: 18.20.7
