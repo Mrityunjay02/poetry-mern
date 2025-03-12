@@ -1,14 +1,13 @@
-import { Router } from "express";
-import {
+const express = require('express');
+const router = express.Router();
+const {
   addShayaris,
   deleteShayaris,
   getShayaris,
   editShayaris,
-} from "../controller/shayari.controller.js";
-import { loginUser, register } from "../controller/auth.controller.js";
-import { authenticateToken } from "../middleware/auth.middleware.js";
-
-const router = Router();
+} = require("../controller/shayari.controller");
+const { loginUser, register } = require("../controller/auth.controller");
+const { authenticateToken } = require("../middleware/auth.middleware");
 
 // Public routes
 router.get("/getShayari", getShayaris);
@@ -20,4 +19,4 @@ router.post("/addShayari", authenticateToken, addShayaris);
 router.delete("/deleteShayari/:id", authenticateToken, deleteShayaris);
 router.put("/editShayari/:id", authenticateToken, editShayaris);
 
-export default router;
+module.exports = router;
