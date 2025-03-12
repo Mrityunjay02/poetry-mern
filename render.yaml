@@ -2,7 +2,10 @@ services:
   - type: web
     name: poetry-mern-backend
     runtime: node
-    buildCommand: cd Server && npm install
+    buildCommand: |
+      cd Server
+      rm -rf node_modules
+      npm install
     startCommand: cd Server && node server.js
     envVars:
       - key: NODE_VERSION
