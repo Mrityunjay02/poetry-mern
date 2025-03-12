@@ -1,4 +1,5 @@
-import express from 'express';
+import pkg from 'express';
+const { default: express } = pkg;
 const router = express.Router();
 import {
   addShayaris,
