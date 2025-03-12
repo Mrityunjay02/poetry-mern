@@ -1,5 +1,6 @@
 // ES Module imports
-import express from 'express';
+import pkg from 'express';
+const { default: express } = pkg;
 import cors from 'cors';
 import dotenv from 'dotenv';
 import { fileURLToPath } from 'url';
