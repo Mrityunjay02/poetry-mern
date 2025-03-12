@@ -7,7 +7,7 @@ services:
       npm cache clean --force
       rm -rf node_modules package-lock.json
       npm install
-    startCommand: node server.js
+    startCommand: NODE_OPTIONS='--experimental-specifier-resolution=node' node server.js
     envVars:
       - key: NODE_VERSION
         value: 18.20.7
