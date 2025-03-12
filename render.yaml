@@ -3,10 +3,8 @@ services:
     name: poetry-mern-backend
     runtime: node
     rootDirectory: Server
-    buildCommand: |
-      cd Server
-      npm install --omit=dev
-    startCommand: cd Server && node server.js
+    buildCommand: npm install
+    startCommand: node server.js
     envVars:
       - key: NODE_VERSION
         value: 18.20.7
