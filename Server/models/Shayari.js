@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+const mongoose = require('mongoose');
 
 // Define the schema
 const ShayariSchema = new mongoose.Schema({
@@ -27,4 +27,4 @@ ShayariSchema.index({ title: 'text', content: 'text' });
 // Create the model
 const Shayari = mongoose.model('Shayari', ShayariSchema);
 
-export default Shayari;
+module.exports = Shayari;

@@ -1,13 +1,13 @@
-import bcrypt from "bcrypt";
-import jwt from "jsonwebtoken";
-import User from "../models/User.js";
-import dotenv from "dotenv";
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
+const User = require("../models/User.js");
+const dotenv = require("dotenv");
 
 dotenv.config();
 
 const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key';
 
-export const loginUser = async (req, res) => {
+const loginUser = async (req, res) => {
   try {
     const { email, password } = req.body;
 
@@ -59,7 +59,7 @@ export const loginUser = async (req, res) => {
   }
 };
 
-export const register = async (req, res) => {
+const register = async (req, res) => {
   try {
     const { email, password } = req.body;
 
@@ -108,3 +108,5 @@ export const register = async (req, res) => {
     });
   }
 };
+
+module.exports = { loginUser, register };

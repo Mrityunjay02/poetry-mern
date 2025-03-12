@@ -1,4 +1,4 @@
-import Shayari from '../models/Shayari.js';
+const Shayari = require('../models/Shayari.js');
 
 // Get all shayaris with pagination
 const getShayaris = async (req, res) => {
@@ -155,4 +155,4 @@ const editShayaris = async (req, res) => {
   }
 };
 
-export { getShayaris, addShayaris, deleteShayaris, editShayaris };
+module.exports = { getShayaris, addShayaris, deleteShayaris, editShayaris };

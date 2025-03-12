@@ -1,18 +1,13 @@
-// ES Module imports
-import express from 'express';
-import cors from 'cors';
-import dotenv from 'dotenv';
-import { fileURLToPath } from 'url';
-import { dirname, join } from 'path';
-import mongoose from 'mongoose';
-import router from './routes/shayari.js';
-
-// Get __dirname equivalent in ES Module
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
+// CommonJS imports
+const express = require('express');
+const cors = require('cors');
+const dotenv = require('dotenv');
+const path = require('path');
+const mongoose = require('mongoose');
+const router = require('./routes/shayari.js');
 
 // Load environment variables
-dotenv.config({ path: join(__dirname, '.env'), override: true });
+dotenv.config({ path: path.join(__dirname, '.env'), override: true });
 
 // Debug: Print environment status (but not sensitive values)
 console.log('Environment Status:', {
