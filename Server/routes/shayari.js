@@ -7,7 +7,7 @@ const {
   editShayaris,
 } = require("../controller/shayari.controller.js");
 const { loginUser, register } = require("../controller/auth.controller.js");
-const { authenticateToken } = require("../middleware/auth.middleware.js");
+const { authenticateToken } = require("../Middleware/auth.middleware.js");
 
 // Public routes
 router.get("/getShayari", getShayaris);
