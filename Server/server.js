@@ -1,17 +1,18 @@
-import express from 'express';
-import cors from 'cors';
+// CommonJS-style imports for better compatibility
+const express = await import('express');
+const cors = await import('cors');
+const dotenv = await import('dotenv');
+const { fileURLToPath } = await import('url');
+const { dirname, join } = await import('path');
+const mongoose = await import('mongoose');
 import router from './routes/shayari.js';
-import { config } from 'dotenv';
-import { fileURLToPath } from 'url';
-import { dirname, join } from 'path';
-import mongoose from 'mongoose';
 
 // Get __dirname equivalent in ES Module
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 // Load environment variables
-config({ path: join(__dirname, '.env'), override: true });
+dotenv.config({ path: join(__dirname, '.env'), override: true });
 
 // Debug: Print environment status (but not sensitive values)
 console.log('Environment Status:', {
@@ -27,14 +28,14 @@ if (!process.env.MONGODB_URI) {
   process.exit(1);
 }
 
-const app = express();
-app.use(cors({
+const app = express.default();
+app.use(cors.default({
   origin: ['http://localhost:3000', 'https://mjaypoetry.onrender.com', 'https://shayari-mern.onrender.com', 'https://shayari-mern.vercel.app'],
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization']
 }));
-app.use(express.json());
+app.use(express.default.json());
 
 // Root route
 app.get('/', (req, res) => {
@@ -53,7 +54,7 @@ const mongoURI = process.env.MONGODB_URI;
 console.log('🚀 Attempting to connect to MongoDB...');
 
 // Connect using Mongoose
-mongoose.connect(mongoURI, {
+mongoose.default.connect(mongoURI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   serverSelectionTimeoutMS: 30000,
@@ -69,15 +70,15 @@ mongoose.connect(mongoURI, {
 });
 
 // Handle MongoDB connection events
-mongoose.connection.on('connected', () => {
+mongoose.default.connection.on('connected', () => {
   console.log('🎉 Mongoose connected to MongoDB');
 });
 
-mongoose.connection.on('error', (err) => {
+mongoose.default.connection.on('error', (err) => {
   console.error('❌ Mongoose connection error:', err);
 });
 
-mongoose.connection.on('disconnected', () => {
+mongoose.default.connection.on('disconnected', () => {
   console.log('💔 Mongoose disconnected');
 });
 
@@ -93,6 +94,6 @@ app.listen(PORT, () => {
 // Handle server shutdown
 process.on('SIGTERM', () => {
   console.log('Received SIGTERM signal. Closing server...');
-  mongoose.connection.close();
+  mongoose.default.connection.close();
   process.exit(0);
 });
