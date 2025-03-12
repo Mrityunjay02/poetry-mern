@@ -12,8 +12,9 @@ dotenv.config({ path: path.join(__dirname, '.env'), override: true });
 // Debug: Print environment status (but not sensitive values)
 console.log('Environment Status:', {
   MONGODB_URI: process.env.MONGODB_URI ? '✓ Set' : '✗ Missing',
-  PORT: process.env.PORT || '3000 (default)',
-  NODE_ENV: process.env.NODE_ENV || 'development'
+  PORT: process.env.PORT || '8083 (default)',
+  NODE_ENV: process.env.NODE_ENV || 'development',
+  SERVER_URL: `http://localhost:${process.env.PORT || 8083}`
 });
 
 if (!process.env.MONGODB_URI) {
@@ -35,24 +36,25 @@ const corsOptions = {
       'https://shayari-mern.vercel.app',
       'https://poetry-mern.c3dotfh.mjayp.projects.vercel.app'
     ];
-    console.log('Incoming request from origin:', origin);
-    if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+    console.log('🔍 Request from origin:', origin);
+    if (!origin || allowedOrigins.includes(origin)) {
       callback(null, true);
     } else {
+      console.log('❌ CORS blocked origin:', origin);
       callback(new Error('CORS policy violation'));
     }
   },
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization']
+  allowedHeaders: ['Content-Type', 'Authorization', 'Origin', 'Accept']
 };
 
 app.use(cors(corsOptions));
 app.use(express.json());
 
-// Debug middleware
+// Request logging middleware
 app.use((req, res, next) => {
-  console.log(`${new Date().toISOString()} - ${req.method} ${req.path}`);
+  console.log(`📥 ${new Date().toISOString()} - ${req.method} ${req.path}`);
   next();
 });
 
@@ -62,19 +64,27 @@ app.get('/', (req, res) => {
     message: 'Welcome to Shayari API',
     status: 'Server is running',
     environment: process.env.NODE_ENV,
-    timestamp: new Date().toISOString()
+    timestamp: new Date().toISOString(),
+    version: '1.0.0'
   });
 });
 
-// API routes
-app.use('/api', router);
+// API routes with error handling
+app.use('/api', (req, res, next) => {
+  console.log(`🛣️ API Route: ${req.method} ${req.path}`);
+  next();
+}, router);
+
+// Error handling middleware
+app.use((err, req, res, next) => {
+  console.error('❌ Error:', err.message);
+  res.status(500).json({ error: 'Internal Server Error', message: err.message });
+});
 
 // MongoDB connection
 const mongoURI = process.env.MONGODB_URI;
-
 console.log('🚀 Attempting to connect to MongoDB...');
 
-// Connect using Mongoose
 mongoose.connect(mongoURI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
@@ -105,9 +115,14 @@ mongoose.connection.on('disconnected', () => {
 
 const PORT = process.env.PORT || 8083;
 
-app.listen(PORT, () => {
-  console.log(`🚀 Server is running on port ${PORT}`);
-  console.log('Allowed origins:', corsOptions.origin);
+const server = app.listen(PORT, () => {
+  console.log(`
+🚀 Server is running on:
+   - Local: http://localhost:${PORT}
+   - Production: https://poetry-mern-backend.onrender.com
+   - Environment: ${process.env.NODE_ENV}
+   - Port: ${PORT}
+  `);
 }).on('error', (err) => {
   console.error('❌ Server error:', err);
   process.exit(1);
@@ -115,7 +130,12 @@ app.listen(PORT, () => {
 
 // Handle server shutdown
 process.on('SIGTERM', () => {
-  console.log('Received SIGTERM signal. Closing server...');
-  mongoose.connection.close();
-  process.exit(0);
+  console.log('👋 Received SIGTERM signal. Closing server...');
+  server.close(() => {
+    console.log('🔄 Server closed. Disconnecting from MongoDB...');
+    mongoose.connection.close(false, () => {
+      console.log('✅ MongoDB connection closed. Exiting...');
+      process.exit(0);
+    });
+  });
 });
