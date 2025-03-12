@@ -12,3 +12,7 @@ services:
         value: production
       - key: PORT
         value: 8083
+      - key: MONGODB_URI
+        fromDatabase:
+          name: poetry-mern-db
+          property: connectionString
