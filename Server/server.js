@@ -1,6 +1,7 @@
 // ES Module imports
-import pkg from 'express';
-const { default: express } = pkg;
+import { createRequire } from 'module';
+const require = createRequire(import.meta.url);
+const express = require('express');
 import cors from 'cors';
 import dotenv from 'dotenv';
 import { fileURLToPath } from 'url';
