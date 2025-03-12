@@ -128,14 +128,24 @@ const server = app.listen(PORT, () => {
   process.exit(1);
 });
 
-// Handle server shutdown
-process.on('SIGTERM', () => {
-  console.log('👋 Received SIGTERM signal. Closing server...');
-  server.close(() => {
-    console.log('🔄 Server closed. Disconnecting from MongoDB...');
-    mongoose.connection.close(false, () => {
-      console.log('✅ MongoDB connection closed. Exiting...');
-      process.exit(0);
+// Handle server shutdown gracefully
+process.on('SIGTERM', async () => {
+  console.log('👋 Received SIGTERM signal. Starting graceful shutdown...');
+  
+  try {
+    // Close server first
+    await new Promise((resolve) => {
+      server.close(resolve);
+      console.log('🔄 Server closed.');
     });
-  });
+
+    // Then close MongoDB connection
+    await mongoose.connection.close();
+    console.log('✅ MongoDB connection closed.');
+    
+    process.exit(0);
+  } catch (err) {
+    console.error('❌ Error during shutdown:', err);
+    process.exit(1);
+  }
 });
