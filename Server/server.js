@@ -29,6 +29,11 @@ const app = express();
 // CORS configuration with detailed logging
 const corsOptions = {
   origin: function(origin, callback) {
+    // In development, allow all origins
+    if (process.env.NODE_ENV !== 'production') {
+      return callback(null, true);
+    }
+
     const allowedOrigins = [
       'http://localhost:3000',
       'https://mjaypoetry.onrender.com',
@@ -37,16 +42,19 @@ const corsOptions = {
       'https://poetry-mern.vercel.app'
     ];
     
-    // Allow Vercel preview URLs
-    const isVercelPreview = origin && (
+    // Allow Vercel preview URLs and development URLs
+    const isVercelPreview = !origin || (
       origin.endsWith('.vercel.app') || 
       origin.includes('poetry-mern') ||
-      origin.includes('mjays-projects.vercel.app')
+      origin.includes('mjays-projects.vercel.app') ||
+      origin.includes('localhost') ||
+      origin.includes('127.0.0.1')
     );
 
     console.log('🔍 Request from origin:', origin);
+    console.log('🌍 Environment:', process.env.NODE_ENV);
     
-    if (!origin || allowedOrigins.includes(origin) || isVercelPreview) {
+    if (isVercelPreview || allowedOrigins.includes(origin)) {
       callback(null, true);
     } else {
       console.log('❌ CORS blocked origin:', origin);
@@ -55,7 +63,9 @@ const corsOptions = {
   },
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization', 'Origin', 'Accept']
+  allowedHeaders: ['Content-Type', 'Authorization', 'Origin', 'Accept', 'X-Requested-With'],
+  exposedHeaders: ['Content-Length', 'X-Requested-With'],
+  maxAge: 86400 // 24 hours
 };
 
 app.use(cors(corsOptions));
