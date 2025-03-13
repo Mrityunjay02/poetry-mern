@@ -21,4 +21,4 @@ services:
     headers:
       - path: /*
         name: Access-Control-Allow-Origin
-        value: https://poetry-mern-430su3utq-mjays-projects.vercel.app
+        value: https://poetry-mern.vercel.app

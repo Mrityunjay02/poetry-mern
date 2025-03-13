@@ -34,6 +34,7 @@ const corsOptions = {
       'https://mjaypoetry.onrender.com',
       'https://shayari-mern.onrender.com',
       'https://shayari-mern.vercel.app',
+      'https://poetry-mern.vercel.app',
       'https://poetry-mern.c3dotfh.mjayp.projects.vercel.app',
       'https://poetry-mern-430su3utq-mjays-projects.vercel.app'
     ];
