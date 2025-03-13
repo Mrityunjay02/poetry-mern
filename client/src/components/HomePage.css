@@ -157,30 +157,56 @@
         padding: 15px;
         margin-top: 56px; /* Slightly smaller margin for mobile */
         min-height: calc(100vh - 56px);
+        overflow-x: hidden; /* Prevent horizontal scroll */
     }
 
     .home-header h1 {
         font-size: 1.75rem;
+        line-height: 1.2;
+        margin-bottom: 0.5rem;
     }
 
     .home-header p {
         font-size: 0.9rem;
+        line-height: 1.4;
     }
 
     .shayari-grid {
         grid-template-columns: 1fr;
         gap: 15px;
+        padding: 10px 5px; /* Reduced side padding */
     }
 
+    /* Enhanced touch targets */
     input[type="text"],
     input[type="password"],
-    textarea {
-        font-size: 16px; /* Prevents zoom on mobile devices */
+    textarea,
+    button {
+        font-size: 16px;
+        min-height: 44px; /* iOS minimum touch target */
         width: 100%;
         max-width: 100%;
         box-sizing: border-box;
         padding: 10px;
         border-radius: 8px;
+        -webkit-tap-highlight-color: rgba(0,0,0,0); /* Remove tap highlight */
+        touch-action: manipulation; /* Optimize touch actions */
+    }
+
+    /* Add pull-to-refresh smooth scroll */
+    .home-page {
+        -webkit-overflow-scrolling: touch;
+        scroll-behavior: smooth;
+    }
+
+    /* Improve card touch feedback */
+    .shayari-card {
+        transition: transform 0.2s ease;
+        touch-action: pan-y pinch-zoom;
+    }
+
+    .shayari-card:active {
+        transform: scale(0.98);
     }
   }
 
@@ -199,19 +225,43 @@
     .error {
         bottom: 10px;
         right: 10px;
-        left: 10px;
-        width: auto;
-        font-size: 14px;
-        padding: 8px 12px;
+        left: 10px; /* Make notifications full width */
+        text-align: center;
+        font-size: 0.9rem;
+        padding: 12px;
     }
 
+    /* Optimize for smaller screens */
     .shayari-grid {
         gap: 12px;
-        padding: 5px;
+        padding: 5px 2px;
     }
-  }
 
-  @media (hover: none) {
+    /* Better touch feedback for very small devices */
+    button, 
+    a {
+        padding: 12px 16px;
+        margin: 2px 0;
+    }
+}
+
+/* Add smooth loading states */
+.loading-skeleton {
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: loading 1.5s infinite;
+}
+
+@keyframes loading {
+    0% {
+        background-position: 200% 0;
+    }
+    100% {
+        background-position: -200% 0;
+    }
+}
+
+@media (hover: none) {
     .nav-menu a,
     button,
     .shayari-card {
@@ -224,4 +274,4 @@
     button {
         touch-action: manipulation;
     }
-  }
+}
