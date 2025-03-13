@@ -8,8 +8,54 @@
   background-color: var(--primary-bg-color); /* Light background color */
   color: var(--text-color); /* Dark text color */
   text-align: center; /* Center align text */
-  padding: 20px; /* Padding for spacing */
+  padding: 15px; /* Padding for spacing */
   border-bottom: 1px solid var(--border-color); /* Light border at bottom */
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.nav-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.nav-menu {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.nav-menu a {
+  text-decoration: none;
+  color: var(--text-color);
+  font-weight: 500;
+  transition: color 0.3s;
+}
+
+.nav-menu a:hover {
+  color: #c53030;
+}
+
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 4px;
+  cursor: pointer;
+  padding: 5px;
+  background: none;
+  border: none;
+}
+
+.hamburger span {
+  display: block;
+  width: 25px;
+  height: 2px;
+  background-color: var(--text-color);
+  transition: all 0.3s;
 }
 
 .App-header h1 {
@@ -20,21 +66,51 @@
 
 /* Responsive Design */
 @media (max-width: 768px) {
-  .App-header h1 {
-    font-size: 1.5rem; /* Slightly smaller font size for mobile */
+  .hamburger {
+    display: flex;
   }
 
-  .App-header {
-    padding: 15px; /* Reduced padding for smaller screens */
+  .nav-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background-color: var(--primary-bg-color);
+    flex-direction: column;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  .nav-menu.active {
+    display: flex;
+  }
+
+  .nav-menu a {
+    padding: 10px 0;
+    width: 100%;
+    text-align: center;
+  }
+
+  .App-header h1 {
+    font-size: 1.5rem; /* Slightly smaller font size for mobile */
   }
 }
 
 @media (max-width: 480px) {
-  .App-header h1 {
-    font-size: 1.2rem; /* Further reduce font size on very small screens */
+  .App-header {
+    padding: 10px;
   }
 
-  .App-header {
-    padding: 10px; /* Even smaller padding */
+  .nav-menu {
+    padding: 15px;
+  }
+
+  .nav-menu a {
+    font-size: 0.9rem;
+  }
+
+  .App-header h1 {
+    font-size: 1.2rem; /* Further reduce font size on very small screens */
   }
 }
