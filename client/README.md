@@ -1,8 +1,8 @@
-# 📝 MjayPoetry - A Modern Shayari Platform
+# 📝 Poethatic - A Modern Shayari Platform
 
 <div align="center">
 
-![MjayPoetry Logo](https://img.shields.io/badge/MjayPoetry-Shayari%20Platform-red)
+![Poethatic Logo](https://img.shields.io/badge/Poethatic-Shayari%20Platform-red)
 ![React](https://img.shields.io/badge/React-18.x-blue)
 ![MongoDB](https://img.shields.io/badge/MongoDB-Latest-green)
 ![License](https://img.shields.io/badge/License-MIT-yellow)
@@ -126,15 +126,15 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 ## About Us
 
-Welcome to **Mjay Poetry**, a space dedicated to the art of shayari. This platform is a reflection of my passion for poetry and my desire to share it with the world.
+Welcome to **Poethatic**, a space dedicated to the art of shayari. This platform is a reflection of my passion for poetry and my desire to share it with the world.
 
-My name is **Mrityunjay Bhardwaj** and I have always been captivated by the beauty of words and emotions. Through Mjay Poetry, I aim to create a sanctuary where words weave magic and emotions find a voice.
+My name is **Mrityunjay Bhardwaj** and I have always been captivated by the beauty of words and emotions. Through Poethatic, I aim to create a sanctuary where words weave magic and emotions find a voice.
 
 Here, you will find a collection of my shayari that explores various themes - love, life, and reflections. Each piece is crafted with care and a touch of personal experience, hoping to resonate with your feelings and thoughts.
 
 Feel free to browse through the gallery of shayaris, and I hope you find something that speaks to you. Whether it's a moment of joy or contemplation, my poetry is here to accompany you.
 
-Thank you for visiting Mjay Poetry. Your presence means a lot, and I hope you enjoy the journey through words and emotions.
+Thank you for visiting Poethatic. Your presence means a lot, and I hope you enjoy the journey through words and emotions.
 
 <div align="center" style="margin: 30px 0;">
 𝓜𝓻𝓲𝓽𝔂𝓾𝓷𝓳𝓪𝔂 𝓑𝓱𝓪𝓻𝓭𝔀𝓪𝓳
@@ -149,11 +149,11 @@ Thank you for visiting Mjay Poetry. Your presence means a lot, and I hope you en
 </div>
 
 <div align="center" style="margin-top: 20px;">
-© August 2024 MjayPoetry. All rights reserved.
+© August 2024 Poethatic. All rights reserved.
 </div>
 
 ---
 
 <div align="center">
-Made with ❤️ by Mrityunjay Bhardwaj | © 2024 MjayPoetry
+Made with ❤️ by Mrityunjay Bhardwaj | © 2024 Poethatic
 </div>

@@ -36,7 +36,7 @@ const corsOptions = {
 
     const allowedOrigins = [
       'http://localhost:3000',
-      'https://mjaypoetry.onrender.com',
+      'https://poethatic.onrender.com',
       'https://shayari-mern.onrender.com',
       'https://shayari-mern.vercel.app',
       'https://poetry-mern.vercel.app'
@@ -138,7 +138,7 @@ const server = app.listen(PORT, () => {
   console.log(`
 🚀 Server is running on:
    - Local: http://localhost:${PORT}
-   - Production: https://mjaypoetry.onrender.com
+   - Production: https://poethatic.onrender.com
    - Environment: ${process.env.NODE_ENV}
    - Port: ${PORT}
   `);

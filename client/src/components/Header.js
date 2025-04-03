@@ -65,9 +65,9 @@ const Header = ({ title = "Welcome to My Shayari Website" }) => {
               to="/" 
               className="text-xl sm:text-2xl md:text-3xl font-bold hover:text-red-500 transition-colors duration-300"
               style={{ fontFamily: "'Dancing Script', cursive" }}
-              aria-label="MjayPoetry Home"
+              aria-label="Poethatic Home"
             >
-              MjayPoetry
+              Poethatic
             </Link>
           </div>
 
