@@ -22,7 +22,7 @@ const Home = () => {
               lineHeight: '1.4',
               letterSpacing: '0.02em'
             }}>
-          Welcome to Mjay Poetry
+          Welcome to Poethatic
         </h1>
 
         {/* Decorative Line */}
