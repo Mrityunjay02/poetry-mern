@@ -125,29 +125,28 @@ const App = () => {
 
   return (
     <div className="container min-h-screen flex flex-col">
-      <nav className="flex items-center justify-between mb-8 p-4">
-        <Link to="/" className="no-underline hover:opacity-80 transition-opacity duration-300">
-          <div className="logo text-3xl" style={{ 
-            fontFamily: "'Cedarville Cursive', cursive",
-            letterSpacing: '0.05em'
-          }}>
-            <span className="text-red-700">M</span>jay
-            <span className="text-red-700">P</span>oetry
+      <nav className="nav-container">
+        <Link to="/" className="logo no-underline hover:opacity-80 transition-opacity duration-300">
+          <div className="flex items-center space-x-2">
+            <h1 className="text-2xl font-bold">
+              <span className="text-red-700">M</span>jay
+              <span className="text-red-700">P</span>oetry
+            </h1>
           </div>
         </Link>
-        <button className="hamburger md:hidden" onClick={toggleMenu}>
+        <button className={`hamburger ${isMenuOpen ? 'active' : ''}`} onClick={toggleMenu} aria-label="Toggle menu">
           <span></span>
           <span></span>
           <span></span>
         </button>
-        <ul className={`flex space-x-6 md:flex ${isMenuOpen ? 'active' : ''}`}>
-          <li><Link to="/" onClick={() => setIsMenuOpen(false)} className="hover:text-red-600 transition-colors duration-300">Home</Link></li>
-          <li><Link to="/about" onClick={() => setIsMenuOpen(false)} className="hover:text-red-600 transition-colors duration-300">About</Link></li>
-          <li><Link to="/shayari" onClick={() => setIsMenuOpen(false)} className="hover:text-red-600 transition-colors duration-300">My Shayari</Link></li>
+        <ul className={isMenuOpen ? 'nav-menu active' : 'nav-menu'}>
+          <li><Link to="/" onClick={() => setIsMenuOpen(false)}>Home</Link></li>
+          <li><Link to="/about" onClick={() => setIsMenuOpen(false)}>About</Link></li>
+          <li><Link to="/shayari" onClick={() => setIsMenuOpen(false)}>My Shayari</Link></li>
           {isAdmin && (
             <>
-              <li><Link to="/shayariManagement" onClick={() => setIsMenuOpen(false)} className="hover:text-red-600 transition-colors duration-300">Shayari Management</Link></li>
-              <li><button onClick={() => { handleLogout(); setIsMenuOpen(false); }} className="hover:text-red-600 transition-colors duration-300">Logout</button></li>
+              <li><Link to="/shayariManagement" onClick={() => setIsMenuOpen(false)}>Shayari Management</Link></li>
+              <li><button onClick={() => { handleLogout(); setIsMenuOpen(false); }} className="nav-button">Logout</button></li>
             </>
           )}
         </ul>
