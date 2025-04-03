@@ -10,10 +10,15 @@ import {
   faSnapchat
 } from '@fortawesome/free-brands-svg-icons';
 import { faShare } from '@fortawesome/free-solid-svg-icons';
+import { motion } from 'framer-motion';
 
 const ShayariCard = ({ text, author = "Unknown", title = "", isAdmin, id, onDelete }) => {
   const [showShareMenu, setShowShareMenu] = useState(false);
   const navigate = useNavigate();
+  const [isLiked, setIsLiked] = useState(false);
+  const [isCopied, setIsCopied] = useState(false);
+  const [showNotification, setShowNotification] = useState(false);
+  const [notificationMessage, setNotificationMessage] = useState('');
 
   const handleEdit = () => {
     navigate('/edit', { state: { text, id, title, author } });
@@ -23,6 +28,45 @@ const ShayariCard = ({ text, author = "Unknown", title = "", isAdmin, id, onDele
     if (window.confirm('Are you sure you want to delete this shayari?')) {
       await onDelete(id);
     }
+  };
+
+  const handleLike = () => {
+    setIsLiked(!isLiked);
+  };
+
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(text);
+      setIsCopied(true);
+      showToast('Shayari copied to clipboard!');
+      setTimeout(() => setIsCopied(false), 2000);
+    } catch (err) {
+      showToast('Failed to copy. Please try again.');
+    }
+  };
+
+  const handleShare = async () => {
+    try {
+      if (navigator.share) {
+        await navigator.share({
+          title: 'Beautiful Shayari from Poethatic',
+          text: text,
+          url: window.location.href
+        });
+        showToast('Shared successfully!');
+      } else {
+        await handleCopy();
+        showToast('Link copied! You can now share it.');
+      }
+    } catch (err) {
+      showToast('Failed to share. Please try again.');
+    }
+  };
+
+  const showToast = (message) => {
+    setNotificationMessage(message);
+    setShowNotification(true);
+    setTimeout(() => setShowNotification(false), 3000);
   };
 
   const socialLinks = [
@@ -69,7 +113,13 @@ const ShayariCard = ({ text, author = "Unknown", title = "", isAdmin, id, onDele
   }
 
   return (
-    <div className="bg-white rounded-xl shadow-lg p-4 sm:p-6 md:p-8 mb-6 mx-auto max-w-4xl relative overflow-hidden">
+    <motion.div 
+      className="bg-white rounded-xl shadow-lg p-4 sm:p-6 md:p-8 mb-6 mx-auto max-w-4xl relative overflow-hidden"
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+      whileHover={{ y: -5 }}
+    >
       <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-red-500 via-purple-500 to-blue-500"></div>
 
       <div className="mb-4 sm:mb-6">
@@ -157,8 +207,48 @@ const ShayariCard = ({ text, author = "Unknown", title = "", isAdmin, id, onDele
             </div>
           )}
         </div>
+
+        <div className="flex items-center gap-4 w-full sm:w-auto">
+          <motion.button 
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
+            className={`action-btn ${isLiked ? 'liked' : ''}`}
+            onClick={handleLike}
+          >
+            <FontAwesomeIcon icon={faHeart} className="text-lg" />
+          </motion.button>
+
+          <motion.button 
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
+            className={`action-btn ${isCopied ? 'copied' : ''}`}
+            onClick={handleCopy}
+          >
+            <FontAwesomeIcon icon={faCopy} className="text-lg" />
+          </motion.button>
+
+          <motion.button 
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
+            className="action-btn"
+            onClick={handleShare}
+          >
+            <FontAwesomeIcon icon={faShare} className="text-lg" />
+          </motion.button>
+        </div>
       </div>
-    </div>
+
+      {showNotification && (
+        <motion.div 
+          className="notification"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: 20 }}
+        >
+          {notificationMessage}
+        </motion.div>
+      )}
+    </motion.div>
   );
 };
 
