@@ -23,37 +23,33 @@ const App = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const fetchShayaris = useCallback(
-    debounce(async () => {
-      try {
-        setLoading(true);
-        setError(null);
-        const API_URL = process.env.REACT_APP_API_URL || 'https://poetry-mern-backend.onrender.com/api';
-        const response = await fetch(`${API_URL}/getShayari?page=${currentPage}&limit=10`);
-        const data = await response.json();
+  const fetchShayaris = useCallback(async () => {
+    try {
+      setLoading(true);
+      setError(null);
+      const API_URL = process.env.REACT_APP_API_URL || 'https://poetry-mern-backend.onrender.com/api';
+      const response = await fetch(`${API_URL}/getShayari?page=${currentPage}&limit=10`);
+      const data = await response.json();
 
-        if (!response.ok) {
-          throw new Error(data.error || 'Failed to fetch shayaris');
-        }
-
-        if (data.success && Array.isArray(data.shayaris)) {
-          setShayaris(data.shayaris);
-          setTotalPages(data.pagination?.totalPages || 1);
-          setCurrentPage(data.pagination?.currentPage || 1);
-        } else {
-          console.error('Invalid response format:', data);
-          throw new Error('Invalid response format from server');
-        }
-      } catch (error) {
-        console.error('Error fetching shayaris:', error);
-        setError(error.message || 'Error fetching shayaris. Please try again later.');
-        setShayaris([]);
-      } finally {
-        setLoading(false);
+      if (!response.ok) {
+        throw new Error(data.error || 'Failed to fetch shayaris');
       }
-    }, 500),
-    [currentPage]
-  );
+
+      if (Array.isArray(data)) {
+        setShayaris(data);
+        setTotalPages(Math.ceil(data.length / 10));
+      } else {
+        console.error('Invalid response format:', data);
+        throw new Error('Invalid response format from server');
+      }
+    } catch (error) {
+      console.error('Error fetching shayaris:', error);
+      setError(error.message || 'Error fetching shayaris. Please try again later.');
+      setShayaris([]);
+    } finally {
+      setLoading(false);
+    }
+  }, [currentPage]);
 
   useEffect(() => {
     fetchShayaris();
@@ -61,13 +57,7 @@ const App = () => {
     if (token) {
       setIsAdmin(true);
     }
-  }, [location.pathname, currentPage]);
-
-  useEffect(() => {
-    if (location.pathname === '/') {
-      setCurrentPage(1);
-    }
-  }, [location.pathname]);
+  }, [fetchShayaris]);
 
   const showNotification = (message) => {
     setNotification(message);
@@ -123,7 +113,19 @@ const App = () => {
       <Header isMenuOpen={isMenuOpen} toggleMenu={toggleMenu} isAdmin={isAdmin} handleLogout={handleLogout} />
       <main className="main-content">
         <Routes>
-          <Route path="/" element={<Home shayaris={shayaris} loading={loading} error={error} currentPage={currentPage} totalPages={totalPages} handlePageChange={handlePageChange} isAdmin={isAdmin} handleDelete={handleDelete} notification={notification} />} />
+          <Route path="/" element={
+            <Home 
+              shayaris={shayaris} 
+              loading={loading} 
+              error={error} 
+              currentPage={currentPage} 
+              totalPages={totalPages} 
+              handlePageChange={handlePageChange} 
+              isAdmin={isAdmin} 
+              handleDelete={handleDelete} 
+              notification={notification} 
+            />
+          } />
           <Route path="/about" element={<About />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/admin/*" element={
