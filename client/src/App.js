@@ -131,8 +131,8 @@ const App = () => {
             fontFamily: "'Cedarville Cursive', cursive",
             letterSpacing: '0.05em'
           }}>
-            <span className="text-red-700">M</span>jay
-            <span className="text-red-700">P</span>oetry
+            <span className="text-red-700">P</span>oe
+            <span className="text-red-700">t</span>hatic
           </div>
         </Link>
         <button className={`hamburger ${isMenuOpen ? 'active' : ''}`} onClick={toggleMenu} aria-label="Toggle menu">
@@ -245,7 +245,7 @@ const App = () => {
 
       <footer className="mt-auto py-4 text-center border-t border-gray-200">
         <p className="text-gray-600" style={{ fontFamily: "'Angsana New', serif", fontSize: '1.1rem' }}>
-          &copy; August 2024 MjayPoetry. All rights reserved.
+          &copy; August 2024 Poethatic. All rights reserved.
         </p>
       </footer>
     </div>

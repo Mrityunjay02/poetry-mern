@@ -33,17 +33,21 @@ const About = () => {
       </div>
       
       <div className="about-content">
-        <p>Welcome to <span className="highlight">Mjay Poetry</span>, where words come alive, emotions find a voice, and the essence of shayari touches the soul.</p>
+        <h1 className="text-3xl font-bold mb-6 text-center">
+          About <span className="text-red-700">P</span>oe<span className="text-red-700">t</span>hatic
+        </h1>
+        
+        <p>Welcome to <span className="highlight">Poe</span><span className="text-red-700">t</span>hatic, where words come alive, emotions find a voice, and the essence of shayari touches the soul.</p>
         
         <p>My name is <span className="highlight">Mrityunjay Bhardwaj</span>, and I have always been captivated by the beauty of words and emotions. My journey with poetry began as a deep love for words and the emotions they carry, evolving into this platform where I share my thoughts with the world.</p>
         
-        <p>Through Mjay Poetry, I aim to create a sanctuary where words weave magic, emotions take flight, and every verse tells a story.</p>
+        <p>Through Poe<span className="text-red-700">t</span>hatic, I aim to create a sanctuary where words weave magic, emotions take flight, and every verse tells a story.</p>
         
         <p>Here, you will find a collection of my shayari that explores various themes—love, life, and reflections. Each piece is crafted with care and a touch of personal experience, hoping to resonate with your feelings and thoughts.</p>
         
         <p>Feel free to browse through the gallery of shayaris, and I hope you find something that speaks to you. Whether it's a moment of joy or contemplation, my poetry is here to accompany you.</p>
         
-        <p>Thank you for visiting Mjay Poetry. Your presence means a lot, and I hope you enjoy the journey through words and emotions. Let's embark on this poetic journey together, where every verse has a story and every word resonates with the heart.</p>
+        <p>Thank you for visiting Poe<span className="text-red-700">t</span>hatic. Your presence means a lot, and I hope you enjoy the journey through words and emotions. Let's embark on this poetic journey together, where every verse has a story and every word resonates with the heart.</p>
       </div>
 
       <div className="signature-section">
