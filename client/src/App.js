@@ -10,7 +10,6 @@ import './styles.css';
 import debounce from 'lodash.debounce';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 
-
 const App = () => {
   const [shayaris, setShayaris] = useState([]);
   const [notification, setNotification] = useState('');
@@ -19,6 +18,7 @@ const App = () => {
   const [totalPages, setTotalPages] = useState(0);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -119,6 +119,10 @@ const App = () => {
     }
   };
 
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
   return (
     <div className="container min-h-screen flex flex-col">
       <nav className="flex items-center justify-between mb-8 p-4">
@@ -131,15 +135,23 @@ const App = () => {
             <span className="text-red-700">P</span>oetry
           </div>
         </Link>
-        <ul className="flex space-x-6">
-          <li><Link to="/" className="hover:text-red-600 transition-colors duration-300">Home</Link></li>
-          <li><Link to="/about" className="hover:text-red-600 transition-colors duration-300">About</Link></li>
-          <li><Link to="/shayari" className="hover:text-red-600 transition-colors duration-300">My Shayari</Link></li>
+        <button className="hamburger md:hidden" onClick={toggleMenu}>
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+        <ul className={`flex space-x-6 md:flex ${isMenuOpen ? 'active' : ''}`}>
+          <li><Link to="/" onClick={() => setIsMenuOpen(false)} className="hover:text-red-600 transition-colors duration-300">Home</Link></li>
+          <li><Link to="/about" onClick={() => setIsMenuOpen(false)} className="hover:text-red-600 transition-colors duration-300">About</Link></li>
+          <li><Link to="/shayari" onClick={() => setIsMenuOpen(false)} className="hover:text-red-600 transition-colors duration-300">My Shayari</Link></li>
           {isAdmin && (
             <>
-              <li><Link to="/shayariManagement" className="hover:text-red-600 transition-colors duration-300">Shayari Management</Link></li>
-              <li><button onClick={handleLogout} className="hover:text-red-600 transition-colors duration-300">Logout</button></li>
+              <li><Link to="/shayariManagement" onClick={() => setIsMenuOpen(false)} className="hover:text-red-600 transition-colors duration-300">Shayari Management</Link></li>
+              <li><button onClick={() => { handleLogout(); setIsMenuOpen(false); }} className="hover:text-red-600 transition-colors duration-300">Logout</button></li>
             </>
+          )}
+          {!isAdmin && (
+            <li><Link to="/login" onClick={() => setIsMenuOpen(false)} className="hover:text-red-600 transition-colors duration-300">Login</Link></li>
           )}
         </ul>
       </nav>

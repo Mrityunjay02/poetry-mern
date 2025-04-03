@@ -28,6 +28,7 @@ nav {
   color: white;
   padding: 1rem;
   border-radius: 8px;
+  position: relative;
 }
 
 nav ul {
@@ -36,6 +37,7 @@ nav ul {
   margin: 0;
   display: flex;
   justify-content: flex-end;
+  align-items: center;
 }
 
 nav ul li {
@@ -46,10 +48,67 @@ nav a {
   color: white;
   text-decoration: none;
   transition: color 0.3s;
+  font-size: 1rem;
+  padding: 0.5rem;
 }
 
 nav a:hover {
   text-decoration: underline;
+}
+
+.hamburger {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+  padding: 0.5rem;
+  background: none;
+  border: none;
+}
+
+.hamburger span {
+  width: 25px;
+  height: 3px;
+  background-color: white;
+  margin: 2px 0;
+  transition: 0.3s;
+}
+
+/* Mobile responsive styles */
+@media screen and (max-width: 768px) {
+  .hamburger {
+    display: flex;
+    position: absolute;
+    right: 1rem;
+    top: 1rem;
+    z-index: 100;
+  }
+
+  nav ul {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    background-color: rgba(0, 0, 0, 0.9);
+    padding: 1rem;
+    border-radius: 0 0 8px 8px;
+  }
+
+  nav ul.active {
+    display: flex;
+  }
+
+  nav ul li {
+    margin: 0.5rem 0;
+    width: 100%;
+    text-align: center;
+  }
+
+  nav ul li a {
+    display: block;
+    padding: 0.5rem;
+  }
 }
 
 /* Notification styling */
