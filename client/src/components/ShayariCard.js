@@ -7,9 +7,12 @@ import {
   faWhatsapp,
   faFacebook,
   faTelegram,
-  faSnapchat
+  faSnapchat,
+  faHeart,
+  faCopy,
+  faShare
 } from '@fortawesome/free-brands-svg-icons';
-import { faShare } from '@fortawesome/free-solid-svg-icons';
+import { faShare as faShareSolid } from '@fortawesome/free-solid-svg-icons';
 import { motion } from 'framer-motion';
 
 const ShayariCard = ({ text, author = "Unknown", title = "", isAdmin, id, onDelete }) => {
@@ -181,7 +184,7 @@ const ShayariCard = ({ text, author = "Unknown", title = "", isAdmin, id, onDele
             onClick={() => setShowShareMenu(!showShareMenu)}
             className="px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-500 text-white rounded-lg flex items-center justify-center gap-3 hover:opacity-90 transition-all duration-200"
           >
-            <FontAwesomeIcon icon={faShare} className="text-xl" />
+            <FontAwesomeIcon icon={faShareSolid} className="text-xl" />
             <span className="font-medium">Share</span>
           </button>
 
@@ -215,7 +218,7 @@ const ShayariCard = ({ text, author = "Unknown", title = "", isAdmin, id, onDele
             className={`action-btn ${isLiked ? 'liked' : ''}`}
             onClick={handleLike}
           >
-            <FontAwesomeIcon icon={faHeart} className="text-lg" />
+            <FontAwesomeIcon icon={faHeart} className={`text-xl ${isLiked ? 'text-red-500' : 'text-gray-400'}`} />
           </motion.button>
 
           <motion.button 
@@ -224,7 +227,7 @@ const ShayariCard = ({ text, author = "Unknown", title = "", isAdmin, id, onDele
             className={`action-btn ${isCopied ? 'copied' : ''}`}
             onClick={handleCopy}
           >
-            <FontAwesomeIcon icon={faCopy} className="text-lg" />
+            <FontAwesomeIcon icon={faCopy} className="text-xl text-gray-400" />
           </motion.button>
 
           <motion.button 
@@ -233,7 +236,7 @@ const ShayariCard = ({ text, author = "Unknown", title = "", isAdmin, id, onDele
             className="action-btn"
             onClick={handleShare}
           >
-            <FontAwesomeIcon icon={faShare} className="text-lg" />
+            <FontAwesomeIcon icon={faShareSolid} className="text-lg" />
           </motion.button>
         </div>
       </div>
