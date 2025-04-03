@@ -9,7 +9,11 @@ import {
   faTelegram,
   faSnapchat
 } from '@fortawesome/free-brands-svg-icons';
-import { faShare } from '@fortawesome/free-solid-svg-icons';
+import { 
+  faShare,
+  faHeart,
+  faCopy
+} from '@fortawesome/free-solid-svg-icons';
 import { motion } from 'framer-motion';
 
 const ShayariCard = ({ text, author = "Unknown", title = "", isAdmin, id, onDelete }) => {
@@ -215,7 +219,7 @@ const ShayariCard = ({ text, author = "Unknown", title = "", isAdmin, id, onDele
             className={`action-btn ${isLiked ? 'liked' : ''}`}
             onClick={handleLike}
           >
-            <FontAwesomeIcon icon={faHeart} className="text-lg" />
+            <FontAwesomeIcon icon={faHeart} className={`text-xl ${isLiked ? 'text-red-500' : 'text-gray-400'}`} />
           </motion.button>
 
           <motion.button 
@@ -224,7 +228,7 @@ const ShayariCard = ({ text, author = "Unknown", title = "", isAdmin, id, onDele
             className={`action-btn ${isCopied ? 'copied' : ''}`}
             onClick={handleCopy}
           >
-            <FontAwesomeIcon icon={faCopy} className="text-lg" />
+            <FontAwesomeIcon icon={faCopy} className="text-xl text-gray-400" />
           </motion.button>
 
           <motion.button 
