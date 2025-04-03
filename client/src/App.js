@@ -35,12 +35,28 @@ const App = () => {
         throw new Error(data.error || 'Failed to fetch shayaris');
       }
 
-      // Check if data has the expected structure
-      if (data.success && Array.isArray(data.shayaris)) {
+      // Log the response to see its structure
+      console.log('API Response:', data);
+
+      // Check if data is an array (direct array response)
+      if (Array.isArray(data)) {
+        setShayaris(data);
+        setTotalPages(Math.ceil(data.length / 10));
+        setCurrentPage(1);
+      }
+      // Check if data has shayaris property
+      else if (data.shayaris && Array.isArray(data.shayaris)) {
         setShayaris(data.shayaris);
-        setTotalPages(data.pagination?.totalPages || 1);
-        setCurrentPage(data.pagination?.currentPage || 1);
-      } else {
+        setTotalPages(data.totalPages || Math.ceil(data.shayaris.length / 10));
+        setCurrentPage(data.currentPage || 1);
+      }
+      // Check if data is a paginated response
+      else if (data.data && Array.isArray(data.data)) {
+        setShayaris(data.data);
+        setTotalPages(data.totalPages || Math.ceil(data.data.length / 10));
+        setCurrentPage(data.currentPage || 1);
+      }
+      else {
         console.error('Invalid response format:', data);
         throw new Error('Invalid response format from server');
       }
