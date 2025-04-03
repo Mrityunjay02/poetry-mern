@@ -35,9 +35,11 @@ const App = () => {
         throw new Error(data.error || 'Failed to fetch shayaris');
       }
 
-      if (Array.isArray(data)) {
-        setShayaris(data);
-        setTotalPages(Math.ceil(data.length / 10));
+      // Check if data has the expected structure
+      if (data.success && Array.isArray(data.shayaris)) {
+        setShayaris(data.shayaris);
+        setTotalPages(data.pagination?.totalPages || 1);
+        setCurrentPage(data.pagination?.currentPage || 1);
       } else {
         console.error('Invalid response format:', data);
         throw new Error('Invalid response format from server');
