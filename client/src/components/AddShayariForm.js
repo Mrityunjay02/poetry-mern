@@ -40,7 +40,8 @@ const AddShayariForm = ({ shayariToEdit, onShayariUpdated }) => {
 
     try {
       let response;
-      const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:8083/api';
+      const API_URL = process.env.REACT_APP_API_URL || 'https://poetry-mern-backend.onrender.com/api';
+      
       const headers = {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${token}`
@@ -48,21 +49,23 @@ const AddShayariForm = ({ shayariToEdit, onShayariUpdated }) => {
       
       if (isEditing) {
         // Edit existing shayari
-        response = await axios.put(
-          `${API_URL}/editShayari/${state?.id}`,
-          formData,
-          { headers, withCredentials: true }
-        );
+        response = await axios({
+          method: 'PUT',
+          url: `${API_URL}/editShayari/${state?.id}`,
+          data: formData,
+          headers
+        });
       } else {
         // Add new shayari
-        response = await axios.post(
-          `${API_URL}/addShayari`,
-          formData,
-          { headers, withCredentials: true }
-        );
+        response = await axios({
+          method: 'POST',
+          url: `${API_URL}/addShayari`,
+          data: formData,
+          headers
+        });
       }
 
-      if (response.status === (isEditing ? 200 : 201)) {
+      if (response.data.success) {
         setMessage(
           isEditing
             ? "Shayari updated successfully!"
@@ -73,7 +76,7 @@ const AddShayariForm = ({ shayariToEdit, onShayariUpdated }) => {
       }
     } catch (error) {
       console.error('Error:', error);
-      setMessage(error.response?.data?.error || "An error occurred while processing the request.");
+      setMessage(error.response?.data?.message || "An error occurred while processing the request.");
     }
     setLoading(false);
   };
@@ -85,17 +88,23 @@ const AddShayariForm = ({ shayariToEdit, onShayariUpdated }) => {
   const handleDelete = async () => {
     if (shayariToEdit && window.confirm("Are you sure you want to delete this shayari?")) {
       try {
-        const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:8083/api';
+        const API_URL = process.env.REACT_APP_API_URL || 'https://poetry-mern-backend.onrender.com/api';
+        
         const token = localStorage.getItem('token');
-        const headers = {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`
-        };
+        if (!token) {
+          throw new Error('Authentication required');
+        }
+
         const response = await axios.delete(
           `${API_URL}/deleteShayari/${shayariToEdit._id}`,
-          { headers }
+          {
+            headers: {
+              'Authorization': `Bearer ${token}`
+            }
+          }
         );
-        if (response.status === 200) {
+
+        if (response.data.success) {
           setMessage("Shayari deleted successfully!");
           onShayariUpdated(); // Refresh the list in parent
         } else {

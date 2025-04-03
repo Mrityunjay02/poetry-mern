@@ -27,7 +27,7 @@ const LoginPage = () => {
     setError('');
 
     try {
-      const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:8083/api';
+      const API_URL = process.env.REACT_APP_API_URL || 'https://poetry-mern-backend.onrender.com/api';
       const response = await axios.post(`${API_URL}/login`, formData);
 
       localStorage.setItem('token', response.data.token);

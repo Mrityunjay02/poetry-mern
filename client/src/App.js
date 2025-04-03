@@ -6,7 +6,6 @@ import AddShayariForm from './components/AddShayariForm';
 import ShayariCard from './components/ShayariCard';
 import LoginPage from './pages/LoginPage';
 import ProtectedRoute from './components/ProtectedRoute';
-import NotFound from './pages/NotFound';
 import Header from './components/Header';
 import './styles.css';
 import debounce from 'lodash.debounce';
@@ -132,7 +131,7 @@ const App = () => {
               <AddShayariForm showNotification={showNotification} fetchShayaris={fetchShayaris} />
             </ProtectedRoute>
           } />
-          <Route path="*" element={<NotFound />} />
+          <Route path="*" element={<div className="text-center p-8"><h1 className="text-2xl text-gray-600">Page Not Found</h1></div>} />
         </Routes>
       </main>
     </div>
