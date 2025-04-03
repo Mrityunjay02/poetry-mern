@@ -150,9 +150,6 @@ const App = () => {
               <li><button onClick={() => { handleLogout(); setIsMenuOpen(false); }} className="hover:text-red-600 transition-colors duration-300">Logout</button></li>
             </>
           )}
-          {!isAdmin && (
-            <li><Link to="/login" onClick={() => setIsMenuOpen(false)} className="hover:text-red-600 transition-colors duration-300">Login</Link></li>
-          )}
         </ul>
       </nav>
 
