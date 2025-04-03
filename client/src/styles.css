@@ -63,6 +63,7 @@ nav a:hover {
   padding: 0.5rem;
   background: none;
   border: none;
+  z-index: 100;
 }
 
 .hamburger span {
@@ -75,24 +76,30 @@ nav a:hover {
 
 /* Mobile responsive styles */
 @media screen and (max-width: 768px) {
+  nav {
+    background: transparent;
+    padding: 0.5rem;
+  }
+
   .hamburger {
     display: flex;
     position: absolute;
     right: 1rem;
     top: 1rem;
-    z-index: 100;
   }
 
   nav ul {
     display: none;
-    position: absolute;
-    top: 100%;
+    position: fixed;
+    top: 0;
     left: 0;
     right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.95);
     flex-direction: column;
-    background-color: rgba(0, 0, 0, 0.9);
-    padding: 1rem;
-    border-radius: 0 0 8px 8px;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
   }
 
   nav ul.active {
@@ -100,14 +107,14 @@ nav a:hover {
   }
 
   nav ul li {
-    margin: 0.5rem 0;
-    width: 100%;
+    margin: 1rem 0;
     text-align: center;
   }
 
   nav ul li a {
+    font-size: 1.2rem;
+    padding: 0.5rem 1rem;
     display: block;
-    padding: 0.5rem;
   }
 }
 
