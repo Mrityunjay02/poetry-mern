@@ -128,78 +128,59 @@ const ShayariCard = ({ text, author = "Unknown", title = "", isAdmin, id, onDele
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,_rgba(255,182,255,0.1),_transparent_50%),radial-gradient(circle_at_bottom_left,_rgba(148,182,255,0.1),_transparent_50%)] opacity-50" />
 
       {/* Main Content Container */}
-      <div className="relative p-8 sm:p-10">
+      <div className="relative p-6 sm:p-8">
         {/* Title Section */}
         {title && (
-          <div className="text-center mb-8">
+          <div className="text-center mb-6">
             <motion.h3 
-              className="text-2xl sm:text-3xl md:text-4xl font-bold"
+              className="text-2xl sm:text-3xl font-bold"
               initial={{ scale: 0.95 }}
               animate={{ scale: 1 }}
               transition={{ duration: 0.5 }}
               style={{
                 fontFamily: "'Dancing Script', cursive",
-                background: 'linear-gradient(135deg, #2D3748 0%, #1A202C 100%)',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-                textShadow: '0 2px 4px rgba(0,0,0,0.05)'
-              }}
-            >
+                color: '#4a5568'
+              }}>
               {title}
             </motion.h3>
           </div>
         )}
 
-        {/* Poetry Content */}
-        <div className="relative px-4 sm:px-8">
-          <motion.div 
-            className="relative"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.2 }}
-          >
-            {/* Decorative Quotes */}
-            <FaQuoteLeft className="absolute -top-6 -left-4 text-pink-300/20 text-5xl transform -rotate-6" />
-            <FaQuoteRight className="absolute -bottom-6 -right-4 text-blue-300/20 text-5xl transform rotate-6" />
-            
-            {/* Poetry Lines */}
-            <div className="space-y-3 py-6">
-              {text.split('\n').map((line, index) => (
-                <motion.p
-                  key={index}
-                  className="text-xl sm:text-2xl text-gray-700 text-center px-6"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ 
-                    delay: 0.1 * index,
-                    duration: 0.5
-                  }}
-                  style={{
-                    fontFamily: "'Playfair Display', serif",
-                    lineHeight: '1.8',
-                    letterSpacing: '0.01em'
-                  }}
-                >
-                  {line.trim() || '\u00A0'}
-                </motion.p>
-              ))}
-            </div>
-
-            {/* Author */}
-            <motion.p 
-              className="text-right text-lg sm:text-xl text-gray-600 mt-6 italic mr-8"
-              initial={{ x: 20, opacity: 0 }}
-              animate={{ x: 0, opacity: 1 }}
-              transition={{ delay: 0.4 }}
-              style={{
-                fontFamily: "'Dancing Script', cursive",
-                letterSpacing: '0.05em'
-              }}
-            >
-              - {author}
-            </motion.p>
-          </motion.div>
+        {/* Shayari Text */}
+        <div className="relative mb-6">
+          <FaQuoteLeft className="absolute top-0 left-0 text-pink-400/20 text-3xl" />
+          <div className="space-y-4 px-8 py-2">
+            {text.split('\n').map((line, index) => (
+              <motion.p
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.1 }}
+                className="text-lg sm:text-xl md:text-2xl text-center leading-relaxed tracking-wide"
+                style={{
+                  fontFamily: "'Noto Nastaliq Urdu', serif",
+                  color: '#2d3748',
+                  textShadow: '0 0 1px rgba(0,0,0,0.1)',
+                  lineHeight: '2'
+                }}
+              >
+                {line}
+              </motion.p>
+            ))}
+          </div>
+          <FaQuoteRight className="absolute bottom-0 right-0 text-pink-400/20 text-3xl" />
         </div>
+
+        {/* Author Section */}
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.3 }}
+          className="text-right text-gray-600 italic mt-4 text-base sm:text-lg"
+          style={{ fontFamily: "'Playfair Display', serif" }}
+        >
+          - {author}
+        </motion.p>
 
         {/* Action Buttons */}
         <motion.div 
