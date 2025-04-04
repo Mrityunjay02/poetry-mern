@@ -101,43 +101,104 @@ const Home = () => {
 
           <motion.div 
             variants={itemVariants}
-            className="h-1 w-48 mx-auto mb-8 sm:mb-12 bg-gradient-to-r from-red-500 via-purple-500 to-blue-500 rounded-full"
+            className="w-24 sm:w-32 h-1 mx-auto mb-8 sm:mb-12 bg-gradient-to-r from-red-500 via-purple-500 to-blue-500 rounded-full"
           />
 
-          <motion.div variants={quoteVariants} className="mb-12">
-            <FaQuoteLeft className="inline-block text-2xl sm:text-3xl text-red-600 mr-2" />
-            <span className="text-xl sm:text-2xl md:text-3xl lg:text-4xl text-gray-600 italic">
-              Words that touch hearts, verses that inspire souls
-            </span>
-            <FaQuoteRight className="inline-block text-2xl sm:text-3xl text-red-600 ml-2" />
+          <motion.div
+            variants={quoteVariants}
+            className="relative mb-12 px-8"
+          >
+            <FaQuoteLeft className="absolute top-0 left-0 text-red-400/30 text-4xl" />
+            <motion.p 
+              variants={itemVariants}
+              className="text-xl sm:text-2xl md:text-3xl lg:text-4xl mb-8 sm:mb-12 text-gray-600 px-4"
+              style={{ 
+                fontFamily: "'Dancing Script', cursive",
+                lineHeight: '1.6',
+                letterSpacing: '0.02em'
+              }}>
+              Discover the beauty of words and immerse yourself in the world of shayari. Explore our collection, and let each piece of poetry touch your soul.
+            </motion.p>
+            <FaQuoteRight className="absolute bottom-0 right-0 text-red-400/30 text-4xl" />
           </motion.div>
 
-          <motion.div variants={itemVariants} className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-12">
+          <motion.div 
+            variants={itemVariants}
+            className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-3xl mx-auto mb-12"
+          >
             <Link 
               to="/shayari" 
-              className="group relative overflow-hidden bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
+              className="group relative overflow-hidden rounded-2xl bg-white shadow-lg hover:shadow-2xl transition-all duration-500 p-8 transform hover:-translate-y-2"
             >
-              <div className="absolute inset-0 bg-gradient-to-r from-red-500/10 to-purple-500/10 transform group-hover:scale-105 transition-transform duration-300" />
-              <h3 className="text-2xl font-semibold mb-2 relative z-10">Explore Shayaris</h3>
-              <p className="text-gray-600 relative z-10">Discover beautiful poetry</p>
+              <div className="absolute inset-0 bg-gradient-to-br from-pink-100 via-red-50 to-white opacity-50 group-hover:opacity-100 transition-opacity duration-500" />
+              <div className="absolute -inset-1 bg-gradient-to-r from-red-500 to-purple-600 rounded-2xl opacity-20 group-hover:opacity-30 blur transition-all duration-500 group-hover:blur-md" />
+              <div className="absolute top-0 left-0 w-full h-full bg-white/50 opacity-0 group-hover:opacity-100 transition-opacity duration-500 backdrop-blur-sm" />
+              <div className="relative z-10 transition-transform duration-500 group-hover:scale-105">
+                <h3 className="text-3xl font-bold mb-4 bg-gradient-to-r from-red-600 to-purple-600 bg-clip-text text-transparent transform transition-all duration-500"
+                    style={{ 
+                      fontFamily: "'Dancing Script', cursive",
+                      letterSpacing: '0.02em',
+                      textShadow: '0 0 1px rgba(0,0,0,0.1)'
+                    }}>
+                  ✨ Explore Shayaris
+                </h3>
+                <p className="text-lg text-gray-600 font-medium"
+                   style={{
+                     fontFamily: "'Playfair Display', serif",
+                     lineHeight: '1.6',
+                     textShadow: '0 0 1px rgba(0,0,0,0.05)'
+                   }}>
+                  Discover beautiful verses that touch your soul
+                </p>
+              </div>
+              <div className="absolute bottom-4 right-4 opacity-0 group-hover:opacity-100 transition-all duration-500 transform group-hover:translate-x-[-8px]">
+                <FaFeather className="text-2xl text-red-500 animate-bounce" />
+              </div>
             </Link>
 
             <Link 
               to="/about" 
-              className="group relative overflow-hidden bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
+              className="group relative overflow-hidden rounded-2xl bg-white shadow-lg hover:shadow-2xl transition-all duration-500 p-8 transform hover:-translate-y-2"
             >
-              <div className="absolute inset-0 bg-gradient-to-r from-purple-500/10 to-blue-500/10 transform group-hover:scale-105 transition-transform duration-300" />
-              <h3 className="text-2xl font-semibold mb-2 relative z-10">About Us</h3>
-              <p className="text-gray-600 relative z-10">Learn about our poetic journey</p>
+              <div className="absolute inset-0 bg-gradient-to-br from-purple-100 via-blue-50 to-white opacity-50 group-hover:opacity-100 transition-opacity duration-500" />
+              <div className="absolute -inset-1 bg-gradient-to-r from-purple-600 to-blue-600 rounded-2xl opacity-20 group-hover:opacity-30 blur transition-all duration-500 group-hover:blur-md" />
+              <div className="absolute top-0 left-0 w-full h-full bg-white/50 opacity-0 group-hover:opacity-100 transition-opacity duration-500 backdrop-blur-sm" />
+              <div className="relative z-10 transition-transform duration-500 group-hover:scale-105">
+                <h3 className="text-3xl font-bold mb-4 bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent transform transition-all duration-500"
+                    style={{ 
+                      fontFamily: "'Dancing Script', cursive",
+                      letterSpacing: '0.02em',
+                      textShadow: '0 0 1px rgba(0,0,0,0.1)'
+                    }}>
+                  🌟 About Us
+                </h3>
+                <p className="text-lg text-gray-600 font-medium"
+                   style={{
+                     fontFamily: "'Playfair Display', serif",
+                     lineHeight: '1.6',
+                     textShadow: '0 0 1px rgba(0,0,0,0.05)'
+                   }}>
+                  Learn about our poetic journey
+                </p>
+              </div>
+              <div className="absolute bottom-4 right-4 opacity-0 group-hover:opacity-100 transition-all duration-500 transform group-hover:translate-x-[-8px]">
+                <FaQuoteRight className="text-2xl text-purple-500 animate-bounce" />
+              </div>
             </Link>
           </motion.div>
 
           <motion.div 
             variants={itemVariants}
-            className="flex items-center justify-center space-x-2 text-gray-500"
+            className="flex items-center justify-center space-x-3 mt-8"
           >
-            <FaHeart className="text-red-500 animate-pulse" />
-            <p className="text-sm">Created with love for poetry lovers</p>
+            <FaHeart className="text-red-500 animate-pulse text-3xl" />
+            <p className="text-2xl sm:text-3xl font-medium bg-gradient-to-r from-red-500 via-purple-500 to-blue-500 bg-clip-text text-transparent" 
+               style={{ 
+                 fontFamily: "'Dancing Script', cursive",
+                 letterSpacing: '0.05em'
+               }}>
+              Where emotions meet words
+            </p>
           </motion.div>
         </div>
       </motion.div>
