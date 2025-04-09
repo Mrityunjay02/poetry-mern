@@ -78,6 +78,7 @@ module.exports = {
         sans: ["Inter", "sans-serif"],
         serif: ["Angsana New", "serif"],
         cursive: ["Cedarville Cursive", "cursive"],
+        playfair: ["Playfair Display", "serif"],
       },
     },
   },
