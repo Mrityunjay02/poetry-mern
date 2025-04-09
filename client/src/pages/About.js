@@ -58,6 +58,7 @@ const About = () => {
 
         <div className="behind-the-words-section">
           <h2 className="behind-the-words-title">Behind the Words</h2>
+          <hr style={{ width: '80px', border: '1px solid #d4a373', margin: '1rem auto' }} />
           <p><strong>Behind the Words:</strong> Most of my shayaris are inspired by late-night thoughts, coffee musings, and the quiet moments of introspection.</p>
         </div>
 
